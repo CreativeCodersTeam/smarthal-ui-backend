@@ -1,0 +1,44 @@
+name: ci.yml
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  ubuntu-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 and cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '25'
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
+
+      - name: Build, test and generate JaCoCo report
+        run: |
+          mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report package
+
+      - name: Upload built artifact(s)
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-artifacts
+          path: |
+            target/*.jar
+            target/*.war
+
+      - name: Upload JaCoCo report (HTML)
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report-html
+          path: target/site/jacoco
+
+      - name: Upload JaCoCo XML (for coverage services)
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report-xml
+          path: target/site/jacoco/jacoco.xml
