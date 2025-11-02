@@ -27,6 +27,8 @@ paths:
                 $ref: '#/components/schemas/AppInfo'
   /api/device-groups:
     post:
+      tags:
+        - DeviceGroups
       operationId: createDeviceGroup
       requestBody:
         content:
