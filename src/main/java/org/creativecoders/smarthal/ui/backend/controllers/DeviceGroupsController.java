@@ -6,6 +6,8 @@ import org.creativecoders.smarthal.ui.backend.services.DevicesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 class DeviceGroupsController implements DeviceGroupsApi {
 
@@ -16,8 +18,9 @@ class DeviceGroupsController implements DeviceGroupsApi {
     }
 
     @Override
-    public ResponseEntity<Void> createDeviceGroup(DeviceGroupCreationRequest deviceGroupCreationRequest) {
-        // TODO: use devicesService to create the group when service is implemented
-        return ResponseEntity.status(201).build();
+    public ResponseEntity<UUID> createDeviceGroup(DeviceGroupCreationRequest deviceGroupCreationRequest) {
+        return ResponseEntity
+                .status(201)
+                .body(devicesService.createDeviceGroup(deviceGroupCreationRequest.getName()));
     }
 }
