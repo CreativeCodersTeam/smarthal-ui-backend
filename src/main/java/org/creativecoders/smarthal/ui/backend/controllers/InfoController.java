@@ -1,7 +1,6 @@
 package org.creativecoders.smarthal.ui.backend.controllers;
 
-import org.creativecoders.core.Ensure;
-import org.springframework.boot.info.BuildProperties;
+import org.creativecoders.smarthal.ui.backend.services.AppInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,15 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/info")
 class InfoController {
 
-    private final BuildProperties buildProperties;
+    private final AppInfoService appInfoService;
 
-    public InfoController(BuildProperties buildProperties) {
-        this.buildProperties = Ensure.ensureNotNull(buildProperties, "buildProperties");
+    public InfoController(AppInfoService appInfoService) {
+        this.appInfoService = appInfoService;
     }
 
     @GetMapping
     public AppInfo info() {
-        return new AppInfo(this.buildProperties.getVersion());
+        return new AppInfo(appInfoService.getVersion());
     }
-
 }

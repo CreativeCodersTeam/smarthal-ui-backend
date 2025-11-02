@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: SmartHal UI Backend API
+  version: 1.0.0
+  description: |
+    OpenAPI specification for the SmartHal UI Backend.
+  contact:
+    name: CreativeCoders
+  license:
+    name: Apache 2.0
+servers:
+  - url: http://localhost:8080
+    description: Local development
+paths:
+  /api/info:
+    get:
+      tags:
+        - Info
+      summary: Returns general application information
+      operationId: getInfo
+      responses:
+        '200':
+          description: Application information successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppInfo'
+  /api/device-groups:
+    post:
+      operationId: createDeviceGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceGroupCreationRequest'
+        required: true
+      responses:
+        '201':
+          description: Device group successfully created
+components:
+  schemas:
+    AppInfo:
+      type: object
+      description: Data structure returned by `InfoController.info()`
+      properties:
+        version:
+          type: string
+          description: Application version
+      required:
+        - version
+    DeviceGroupCreationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the new device group
+      required:
+        - name
