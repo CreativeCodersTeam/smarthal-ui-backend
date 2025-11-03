@@ -24,16 +24,18 @@ class AuthControllerIntegrationTests {
     @Test
     void login_withValidCredentials_returns200AndToken() throws Exception {
         // arrange
-        var client = HttpClient.newHttpClient();
-        var requestBody = "{\"username\":\"frontend\",\"password\":\"frontend1!\"}";
-        var request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl() + "/api/auth/login"))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+        HttpResponse<String> response;
+        try (var client = HttpClient.newHttpClient()) {
+            var requestBody = "{\"username\":\"frontend\",\"password\":\"frontend1!\"}";
+            var request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl() + "/api/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
 
-        // act
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // act
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        }
 
         // assert
         assertThat(response.statusCode()).isEqualTo(200);
@@ -43,16 +45,18 @@ class AuthControllerIntegrationTests {
     @Test
     void login_withInvalidCredentials_returns401() throws Exception {
         // arrange
-        var client = HttpClient.newHttpClient();
-        var requestBody = "{\"username\":\"wrong\",\"password\":\"wrong\"}";
-        var request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl() + "/api/auth/login"))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+        HttpResponse<String> response;
+        try (var client = HttpClient.newHttpClient()) {
+            var requestBody = "{\"username\":\"wrong\",\"password\":\"wrong\"}";
+            var request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl() + "/api/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
 
-        // act
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // act
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        }
 
         // assert
         assertThat(response.statusCode()).isEqualTo(401);

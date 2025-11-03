@@ -24,14 +24,16 @@ class InfoControllerIntegrationTests {
     @Test
     void getInfo_returns200AndVersion() throws Exception {
         // arrange
-        var client = HttpClient.newHttpClient();
-        var request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl() + "/api/info"))
-                .GET()
-                .build();
+        HttpResponse<String> response;
+        try (var client = HttpClient.newHttpClient()) {
+            var request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl() + "/api/info"))
+                    .GET()
+                    .build();
 
-        // act
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // act
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        }
 
         // assert
         assertThat(response.statusCode()).isEqualTo(200);

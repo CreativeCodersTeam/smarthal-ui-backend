@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public interface DevicesService {
 
-    public UUID createDeviceGroup(String name);
+    UUID createDeviceGroup(String name);
 
 }
