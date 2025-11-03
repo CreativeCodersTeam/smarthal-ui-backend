@@ -109,6 +109,8 @@
                             <configOptions>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <interfaceOnly>true</interfaceOnly>
+                                <generateBuilders>true</generateBuilders>
+                                <skipDefaultInterface>true</skipDefaultInterface>
                                 <useTags>true</useTags>
                                 <useResponseEntity>true</useResponseEntity>
                                 <dateLibrary>java8</dateLibrary>
