@@ -29,7 +29,7 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
         try (var client = HttpClient.newHttpClient()) {
             var requestBody = "{\"name\":\"Living Room\"}";
             var request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl() + "/api/device-groups"))
+                    .uri(URI.create(baseUrl() + "/api/v1/device-groups"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();

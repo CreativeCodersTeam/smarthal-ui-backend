@@ -27,7 +27,7 @@ class InfoControllerIntegrationTests {
         HttpResponse<String> response;
         try (var client = HttpClient.newHttpClient()) {
             var request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl() + "/api/info"))
+                    .uri(URI.create(baseUrl() + "/api/v1/info"))
                     .GET()
                     .build();
 

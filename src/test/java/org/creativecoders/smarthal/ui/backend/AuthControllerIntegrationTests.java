@@ -28,7 +28,7 @@ class AuthControllerIntegrationTests {
         try (var client = HttpClient.newHttpClient()) {
             var requestBody = "{\"username\":\"frontend\",\"password\":\"frontend1!\"}";
             var request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl() + "/api/auth/login"))
+                    .uri(URI.create(baseUrl() + "/api/v1/auth/login"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
@@ -49,7 +49,7 @@ class AuthControllerIntegrationTests {
         try (var client = HttpClient.newHttpClient()) {
             var requestBody = "{\"username\":\"wrong\",\"password\":\"wrong\"}";
             var request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl() + "/api/auth/login"))
+                    .uri(URI.create(baseUrl() + "/api/v1/auth/login"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
