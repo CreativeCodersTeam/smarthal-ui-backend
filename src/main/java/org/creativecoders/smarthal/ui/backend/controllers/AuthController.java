@@ -1,8 +1,8 @@
 package org.creativecoders.smarthal.ui.backend.controllers;
 
 import org.creativecoders.smarthal.ui.backend.api.AuthApi;
-import org.creativecoders.smarthal.ui.backend.model.LoginRequest;
-import org.creativecoders.smarthal.ui.backend.model.LoginResponse;
+import org.creativecoders.smarthal.ui.backend.model.LoginRequestV1;
+import org.creativecoders.smarthal.ui.backend.model.LoginResponseV1;
 import org.creativecoders.smarthal.ui.backend.services.auth.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ class AuthController implements AuthApi {
     }
 
     @Override
-    public ResponseEntity<LoginResponse> login(LoginRequest loginRequest) {
+    public ResponseEntity<LoginResponseV1> login(LoginRequestV1 loginRequest) {
         try {
             var loginResult = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
 
@@ -28,7 +28,7 @@ class AuthController implements AuthApi {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
-            return ResponseEntity.ok(new LoginResponse(loginResult.getToken()));
+            return ResponseEntity.ok(new LoginResponseV1(loginResult.getToken()));
         } catch (Exception _) {
             return ResponseEntity.internalServerError().build();
         }
