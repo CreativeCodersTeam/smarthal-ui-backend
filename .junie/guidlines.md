@@ -1,5 +1,15 @@
 # Spring Boot Guidelines
 
+## General
+
+* Always use english for names of classes, methods, variables, etc. and comments. Unless it is a technical term.
+* Follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
+* Use best practice and conventions for Spring Boot.
+* If a request or a part of it is ambiguous, ask for clarification.
+* Test case classes should implement WithAssertions and use its assertj methods for assertions.
+* After a task is done, always rerun a rebuild and all tests and inspect the results. If build or tests are broken ask
+  if you should try to fix it.
+
 ## 1. Prefer Constructor Injection over Field/Setter Injection
 
 * Declare all the mandatory dependencies as `final` fields and inject them through the constructor.
