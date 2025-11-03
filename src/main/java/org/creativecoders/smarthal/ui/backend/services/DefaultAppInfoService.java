@@ -1,5 +1,6 @@
 package org.creativecoders.smarthal.ui.backend.services;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,12 @@ class DefaultAppInfoService implements AppInfoService {
 
     private final BuildProperties buildProperties;
 
-    DefaultAppInfoService(BuildProperties buildProperties) {
-        this.buildProperties = buildProperties;
+    DefaultAppInfoService(ObjectProvider<BuildProperties> buildPropertiesProvider) {
+        this.buildProperties = buildPropertiesProvider.getIfAvailable();
     }
 
     @Override
     public String getVersion() {
-        return buildProperties.getVersion();
+        return buildProperties != null ? buildProperties.getVersion() : "dev";
     }
 }
