@@ -1,9 +1,11 @@
 package org.creativecoders.smarthal.ui.backend;
 
 import org.assertj.core.api.WithAssertions;
+import org.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -43,7 +45,9 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
         var body = response.body();
         assertThat(body).isNotBlank();
         // ensure it is a UUID
-        assertThatCode(() -> UUID.fromString(body.replace("\"", "").trim()))
-                .doesNotThrowAnyException();
+        var responseObject = new ObjectMapper().readValue(body, DeviceGroupCreationResponseV1.class);
+        assertThat(responseObject.getId()).isNotNull();
+        assertThat(responseObject.getId()).isInstanceOf(UUID.class);
+
     }
 }
