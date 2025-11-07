@@ -1,6 +1,5 @@
 package org.creativecoders.smarthal.ui.backend;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.assertj.core.api.WithAssertions;
 import org.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,7 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
                     .build();
 
             // act
-            responseObject = client.send(request, ofJson(new ObjectMapper()));
+            responseObject = client.send(request, ofJson(new ObjectMapper(), DeviceGroupCreationResponseV1.class));
         }
 
         // assert
@@ -55,17 +54,15 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
 
     }
 
-    public static <T> HttpResponse.BodyHandler<T> ofJson(ObjectMapper mapper) {
+    public <T> HttpResponse.BodyHandler<T> ofJson(ObjectMapper mapper, Class<?> typeClass) {
         Objects.requireNonNull(mapper, "mapper");
-
-        var resultTypeRef = new TypeReference<T>() {
-        };
+        Objects.requireNonNull(typeClass, "typeRef");
 
         return responseInfo -> HttpResponse.BodySubscribers.mapping(
                 HttpResponse.BodySubscribers.ofByteArray(),
                 bytes -> {
                     try {
-                        return mapper.readValue(bytes, mapper.getTypeFactory().constructType(resultTypeRef));
+                        return mapper.readValue(bytes, mapper.getTypeFactory().constructType(typeClass));
                     } catch (IOException e) {
                         throw new UncheckedIOException(e);
                     }
