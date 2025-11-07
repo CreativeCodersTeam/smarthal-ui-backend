@@ -9,6 +9,14 @@
 * Test case classes should implement WithAssertions and use its assertj methods for assertions.
 * After a task is done, always rerun a rebuild and all tests and inspect the results. If build or tests are broken ask
   if you should try to fix it.
+* Use API First pattern. So if a new web api should be created or an existing one should be changed, define the API
+  first in the openapi.yaml file and use the generator openapi-generator-maven-plugin and generate the interfaces and
+  DTOs
+  first. Then create the controller implementing the interface and components needed.
+* Avoid using lombok. Use records or Immutables there appropriate. Otherwise, use standard java classes with
+  constructors, getters,
+  setters, builders, etc.
+* For mapping DTOs to db entities or other models, use mapstruct.
 
 ## 1. Prefer Constructor Injection over Field/Setter Injection
 
@@ -273,4 +281,4 @@ log();
   formats like JSON for seamless ingestion into ELK, Loki, or other log-analysis tools.
 
 * **Better tooling and analysis:** Structured logs and controlled log levels make it easier to filter noise, automate
-  alerts, and visualize application behavior in real time.
+  alerts, and visualize application behavior in real time.~~~~~~~~
