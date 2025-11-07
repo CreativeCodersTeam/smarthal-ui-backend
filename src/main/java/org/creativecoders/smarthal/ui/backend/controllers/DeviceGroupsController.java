@@ -7,8 +7,6 @@ import org.creativecoders.smarthal.ui.backend.services.DevicesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @RestController
 class DeviceGroupsController implements DeviceGroupsApi {
 
