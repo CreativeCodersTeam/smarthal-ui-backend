@@ -24,6 +24,11 @@ class DefaultAuthService implements AuthService {
         return new LoginResult(true, token);
     }
 
+    @Override
+    public boolean logout(String token) {
+        return false;
+    }
+
     private boolean validateCredentials(String username, String password) {
         return Objects.equals(username, "frontend") && Objects.equals(password, "frontend1!");
     }

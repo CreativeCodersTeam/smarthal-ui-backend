@@ -17,6 +17,9 @@
   constructors, getters,
   setters, builders, etc.
 * For mapping DTOs to db entities or other models, use mapstruct.
+* Always cover your written code with tests. Write unit tests each component. Write integration tests if you
+  add a new api endpoint or change the behavior of an existing one. Always check if your changes affect existing tests.
+* Remember that after adding new dependencies, you must run mvn dependency:resolve
 
 ## 1. Prefer Constructor Injection over Field/Setter Injection
 
@@ -281,4 +284,4 @@ log();
   formats like JSON for seamless ingestion into ELK, Loki, or other log-analysis tools.
 
 * **Better tooling and analysis:** Structured logs and controlled log levels make it easier to filter noise, automate
-  alerts, and visualize application behavior in real time.~~~~
+  alerts, and visualize application behavior in real time.
