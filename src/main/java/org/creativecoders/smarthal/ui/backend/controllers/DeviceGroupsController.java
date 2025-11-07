@@ -2,6 +2,7 @@ package org.creativecoders.smarthal.ui.backend.controllers;
 
 import org.creativecoders.smarthal.ui.backend.api.DeviceGroupsApi;
 import org.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationRequestV1;
+import org.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
 import org.creativecoders.smarthal.ui.backend.services.DevicesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,13 @@ class DeviceGroupsController implements DeviceGroupsApi {
     }
 
     @Override
-    public ResponseEntity<UUID> createDeviceGroup(DeviceGroupCreationRequestV1 deviceGroupCreationRequest) {
+    public ResponseEntity<DeviceGroupCreationResponseV1> createDeviceGroup(DeviceGroupCreationRequestV1 deviceGroupCreationRequest) {
+        var response = new DeviceGroupCreationResponseV1.Builder()
+                .id(devicesService.createDeviceGroup(deviceGroupCreationRequest.getName()))
+                .build();
+
         return ResponseEntity
                 .status(201)
-                .body(devicesService.createDeviceGroup(deviceGroupCreationRequest.getName()));
+                .body(response);
     }
 }
