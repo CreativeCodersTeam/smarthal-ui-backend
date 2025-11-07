@@ -26,7 +26,6 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
         return "http://localhost:" + port;
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     void createDeviceGroup_returns201AndUuid() throws Exception {
         // arrange
@@ -58,7 +57,7 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
         Objects.requireNonNull(mapper, "mapper");
         Objects.requireNonNull(typeClass, "typeRef");
 
-        return responseInfo -> HttpResponse.BodySubscribers.mapping(
+        return _ -> HttpResponse.BodySubscribers.mapping(
                 HttpResponse.BodySubscribers.ofByteArray(),
                 bytes -> {
                     try {
