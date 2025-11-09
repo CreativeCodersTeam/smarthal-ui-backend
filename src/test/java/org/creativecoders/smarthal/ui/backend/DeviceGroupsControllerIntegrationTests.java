@@ -53,7 +53,7 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
 
     }
 
-    public <T> HttpResponse.BodyHandler<T> ofJson(ObjectMapper mapper, Class<?> typeClass) {
+    public <T> HttpResponse.BodyHandler<T> ofJson(ObjectMapper mapper, Class<?> typeClass) throws UncheckedIOException {
         Objects.requireNonNull(mapper, "mapper");
         Objects.requireNonNull(typeClass, "typeRef");
 
