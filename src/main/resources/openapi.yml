@@ -43,6 +43,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeviceGroupCreationResponseV1'
+    get:
+      tags:
+        - DeviceGroups
+      operationId: getDeviceGroups
+      responses:
+        '200':
+          description: Device groups successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceGroupV1'
   /api/v1/auth/login:
     post:
       tags:
@@ -90,6 +103,21 @@ components:
           description: Application version
       required:
         - version
+    DeviceGroupV1:
+      type: object
+      description: Data structure returned by `DeviceGroupsController.getDeviceGroups()`
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the device group
+          format: uuid
+        name:
+          type: string
+          description: Name of the device group
+        createdAt:
+          type: string
+          description: Date and time when the device group was created
+          format: date-time
     DeviceGroupCreationRequestV1:
       type: object
       properties:
