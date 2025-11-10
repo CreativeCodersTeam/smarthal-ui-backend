@@ -2,7 +2,7 @@
 
 ## General
 
-* Always use english for names of classes, methods, variables, etc. and comments. Unless it is a technical term.
+* Always use English for names of classes, methods, variables, etc. and comments. Unless it is a technical term.
 * Follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
 * Use best practice and conventions for Spring Boot.
 * If a request or a part of it is ambiguous, ask for clarification.
@@ -13,9 +13,8 @@
   first in the openapi.yaml file and use the generator openapi-generator-maven-plugin and generate the interfaces and
   DTOs
   first. Then create the controller implementing the interface and components needed.
-* Avoid using lombok. Use records or Immutables there appropriate. Otherwise, use standard java classes with
-  constructors, getters,
-  setters, builders, etc.
+* Use records or Immutables there appropriate. Otherwise, use standard java classes with
+  lombok annotations for creating builder, setter, getter, equals, hashCode, toString methods if needed.
 * For mapping DTOs to db entities or other models, use mapstruct.
 * Always cover your written code with tests. Write unit tests each component. Write integration tests if you
   add a new api endpoint or change the behavior of an existing one. Always check if your changes affect existing tests.
@@ -284,4 +283,4 @@ log();
   formats like JSON for seamless ingestion into ELK, Loki, or other log-analysis tools.
 
 * **Better tooling and analysis:** Structured logs and controlled log levels make it easier to filter noise, automate
-  alerts, and visualize application behavior in real time.
+  alerts, and visualize application behavior in real time.~~~~
