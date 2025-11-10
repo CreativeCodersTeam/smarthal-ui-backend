@@ -5,8 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,10 +20,12 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name = "device_groups")
+@Data
 public class DeviceGroupEntity {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(name = "name", nullable = false, unique = true, length = 255)
@@ -26,6 +33,7 @@ public class DeviceGroupEntity {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
+    @Setter(AccessLevel.NONE)
     private OffsetDateTime createdAt;
 
     @UpdateTimestamp
@@ -45,29 +53,5 @@ public class DeviceGroupEntity {
         if (id == null) {
             id = UUID.randomUUID();
         }
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }

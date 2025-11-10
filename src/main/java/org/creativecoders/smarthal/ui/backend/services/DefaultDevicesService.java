@@ -21,7 +21,9 @@ class DefaultDevicesService implements DevicesService {
     @Transactional
     public UUID createDeviceGroup(String name) {
         var entity = new DeviceGroupEntity(null, name);
+
         var saved = deviceGroupRepository.save(entity);
+        
         return saved.getId();
     }
 
