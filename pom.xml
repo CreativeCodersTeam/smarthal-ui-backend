@@ -8,7 +8,7 @@
         <version>3.5.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.creativecoders.smarthal-ui-backend</groupId>
+    <groupId>net.creativecoders.smarthal</groupId>
     <artifactId>smarthal-ui-backend</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <name>smarthal-ui-backend</name>
