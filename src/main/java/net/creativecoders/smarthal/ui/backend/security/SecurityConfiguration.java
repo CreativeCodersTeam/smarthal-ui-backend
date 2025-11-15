@@ -15,8 +15,10 @@ class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/**").permitAll()
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers("/openapi.yml").permitAll())
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers("/api/**").permitAll()
                 );
 
         return http.build();

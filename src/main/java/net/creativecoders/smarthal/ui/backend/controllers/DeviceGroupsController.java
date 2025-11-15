@@ -1,5 +1,6 @@
 package net.creativecoders.smarthal.ui.backend.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import net.creativecoders.smarthal.ui.backend.api.DeviceGroupsApi;
 import net.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationRequestV1;
 import net.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
@@ -10,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
+@Slf4j
 class DeviceGroupsController implements DeviceGroupsApi {
 
     private final DevicesService devicesService;
@@ -25,6 +28,8 @@ class DeviceGroupsController implements DeviceGroupsApi {
         try {
             var id = devicesService.createDeviceGroup(deviceGroupCreationRequest.getName());
 
+            log.info("Device group created with id '{}'", id);
+
             var response = new DeviceGroupCreationResponseV1.Builder()
                     .id(id)
                     .build();
@@ -33,7 +38,9 @@ class DeviceGroupsController implements DeviceGroupsApi {
                     .status(201)
                     .body(response);
 
-        } catch (Exception _) {
+        } catch (Exception e) {
+            log.error("Device group creation failed", e);
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }

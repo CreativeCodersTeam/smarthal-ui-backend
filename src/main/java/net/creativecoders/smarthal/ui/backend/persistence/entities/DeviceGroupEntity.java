@@ -15,9 +15,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/**
- * JPA entity for device groups.
- */
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @Table(name = "device_groups")

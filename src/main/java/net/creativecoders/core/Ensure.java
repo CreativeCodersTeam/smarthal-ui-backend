@@ -20,7 +20,31 @@ public class Ensure {
 
     public static String notNullOrEmpty(@Nullable String str) {
         if (str == null || str.isEmpty()) {
-            throw new IllegalArgumentException("String must not be null or empty");
+            throw new IllegalArgumentException("String parameter must not be null or empty");
+        }
+
+        return str;
+    }
+
+    public static String notNullOrEmpty(@Nullable String str, String paramName) {
+        if (str == null || str.isEmpty()) {
+            throw new IllegalArgumentException("String parameter must not be null or empty: " + paramName);
+        }
+
+        return str;
+    }
+
+    public static String notNullOrBlank(@Nullable String str) {
+        if (str == null || str.isBlank()) {
+            throw new IllegalArgumentException("String parameter must not be null or blank");
+        }
+
+        return str;
+    }
+
+    public static String notNullOrBlank(@Nullable String str, String paramName) {
+        if (str == null || str.isBlank()) {
+            throw new IllegalArgumentException("String parameter must not be null or blank: " + paramName);
         }
 
         return str;
