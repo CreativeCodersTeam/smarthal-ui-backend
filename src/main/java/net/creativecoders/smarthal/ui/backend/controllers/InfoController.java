@@ -1,7 +1,7 @@
 package net.creativecoders.smarthal.ui.backend.controllers;
 
 import net.creativecoders.smarthal.ui.backend.api.InfoApi;
-import net.creativecoders.smarthal.ui.backend.model.AppInfoV1;
+import net.creativecoders.smarthal.ui.backend.api.model.AppInfoV1;
 import net.creativecoders.smarthal.ui.backend.services.AppInfoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

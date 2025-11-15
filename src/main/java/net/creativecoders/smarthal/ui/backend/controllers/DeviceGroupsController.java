@@ -2,9 +2,9 @@ package net.creativecoders.smarthal.ui.backend.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import net.creativecoders.smarthal.ui.backend.api.DeviceGroupsApi;
-import net.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationRequestV1;
-import net.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
-import net.creativecoders.smarthal.ui.backend.model.DeviceGroupV1;
+import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationRequestV1;
+import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationResponseV1;
+import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupV1;
 import net.creativecoders.smarthal.ui.backend.services.DevicesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package net.creativecoders.smarthal.ui.backend;
 
 import org.assertj.core.api.WithAssertions;
-import net.creativecoders.smarthal.ui.backend.model.DeviceGroupCreationResponseV1;
+import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationResponseV1;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;

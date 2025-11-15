@@ -1,9 +1,9 @@
 package net.creativecoders.smarthal.ui.backend.controllers;
 
 import net.creativecoders.smarthal.ui.backend.api.AuthApi;
-import net.creativecoders.smarthal.ui.backend.model.LoginRequestV1;
-import net.creativecoders.smarthal.ui.backend.model.LoginResponseV1;
-import net.creativecoders.smarthal.ui.backend.model.LogoutRequestV1;
+import net.creativecoders.smarthal.ui.backend.api.model.LoginRequestV1;
+import net.creativecoders.smarthal.ui.backend.api.model.LoginResponseV1;
+import net.creativecoders.smarthal.ui.backend.api.model.LogoutRequestV1;
 import net.creativecoders.smarthal.ui.backend.services.auth.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
