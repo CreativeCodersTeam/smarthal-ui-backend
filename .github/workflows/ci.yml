@@ -21,7 +21,7 @@ jobs:
 
       - name: Build, test and generate JaCoCo report
         run: |
-          mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report package
+          mvn -B -V clean generate-sources org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report package
 
       - name: Upload built artifact(s)
         uses: actions/upload-artifact@v4
