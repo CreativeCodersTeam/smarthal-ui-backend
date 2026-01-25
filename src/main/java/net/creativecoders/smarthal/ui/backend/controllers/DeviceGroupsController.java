@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -43,6 +44,24 @@ class DeviceGroupsController implements DeviceGroupsApi {
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteDeviceGroupById(UUID id) {
+        var groupWasFound = devicesService.deleteDeviceGroup(id);
+
+        return groupWasFound ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    @Override
+    public ResponseEntity<DeviceGroupV1> getDeviceGroupById(UUID id) {
+        var device = devicesService.getDeviceGroupById(id);
+
+        if (Objects.isNull(device)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(new DeviceGroupV1().id(device.getId()).name(device.getName()));
     }
 
     @Override

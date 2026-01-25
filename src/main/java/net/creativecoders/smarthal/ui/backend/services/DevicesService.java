@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DevicesService {
-
     UUID createDeviceGroup(String name);
 
     List<DeviceGroupEntity> getAllDeviceGroups();
 
+    boolean deleteDeviceGroup(UUID id);
+
+    DeviceGroupEntity getDeviceGroupById(UUID id);
 }

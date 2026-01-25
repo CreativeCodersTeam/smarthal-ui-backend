@@ -35,4 +35,19 @@ class DefaultDevicesService implements DevicesService {
     public List<DeviceGroupEntity> getAllDeviceGroups() {
         return deviceGroupRepository.findAll();
     }
+
+    @Override
+    @Transactional
+    public boolean deleteDeviceGroup(UUID id) {
+        var deletedCount = deviceGroupRepository.deleteByDeviceGroupId(id);
+
+        return deletedCount > 0;
+    }
+
+    @Override
+    public DeviceGroupEntity getDeviceGroupById(UUID id) {
+        var entity = deviceGroupRepository.findById(id);
+
+        return entity.orElse(null);
+    }
 }
