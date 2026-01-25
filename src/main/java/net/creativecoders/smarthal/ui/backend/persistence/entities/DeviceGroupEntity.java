@@ -51,5 +51,9 @@ public class DeviceGroupEntity {
         if (id == null) {
             id = UUID.randomUUID();
         }
+
+        if (createdAt == null) {
+            createdAt = updatedAt = OffsetDateTime.now();
+        }
     }
 }
