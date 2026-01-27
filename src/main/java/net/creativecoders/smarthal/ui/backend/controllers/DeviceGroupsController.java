@@ -3,7 +3,6 @@ package net.creativecoders.smarthal.ui.backend.controllers;
 import lombok.extern.slf4j.Slf4j;
 import net.creativecoders.smarthal.ui.backend.api.DeviceGroupsApi;
 import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationRequestV1;
-import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationResponseV1;
 import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupV1;
 import net.creativecoders.smarthal.ui.backend.persistence.mappers.DeviceGroupMapper;
 import net.creativecoders.smarthal.ui.backend.services.DevicesService;
