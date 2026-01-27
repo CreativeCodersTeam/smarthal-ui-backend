@@ -1,7 +1,7 @@
 package net.creativecoders.smarthal.ui.backend;
 
+import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupV1;
 import org.assertj.core.api.WithAssertions;
-import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationResponseV1;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -40,7 +40,7 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
     @Test
     void createDeviceGroup_returns201AndUuid() throws Exception {
         // arrange
-        HttpResponse<DeviceGroupCreationResponseV1> responseObject;
+        HttpResponse<DeviceGroupV1> responseObject;
 
         try (var client = HttpClient.newHttpClient()) {
             var requestBody = "{\"name\":\"Living Room\"}";
@@ -51,7 +51,8 @@ class DeviceGroupsControllerIntegrationTests implements WithAssertions {
                     .build();
 
             // act
-            responseObject = client.send(request, ofJson(new ObjectMapper(), DeviceGroupCreationResponseV1.class));
+            var mapper = new ObjectMapper().findAndRegisterModules();
+            responseObject = client.send(request, ofJson(mapper, DeviceGroupV1.class));
         }
 
         // assert
