@@ -5,6 +5,7 @@ import net.creativecoders.smarthal.ui.backend.api.DeviceGroupsApi;
 import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationRequestV1;
 import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupCreationResponseV1;
 import net.creativecoders.smarthal.ui.backend.api.model.DeviceGroupV1;
+import net.creativecoders.smarthal.ui.backend.persistence.mappers.DeviceGroupMapper;
 import net.creativecoders.smarthal.ui.backend.services.DevicesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +21,23 @@ class DeviceGroupsController implements DeviceGroupsApi {
 
     private final DevicesService devicesService;
 
-    public DeviceGroupsController(DevicesService devicesService) {
+    private final DeviceGroupMapper mapper;
+
+    public DeviceGroupsController(DevicesService devicesService, DeviceGroupMapper mapper) {
         this.devicesService = devicesService;
+        this.mapper = mapper;
     }
 
     @Override
-    public ResponseEntity<DeviceGroupCreationResponseV1> createDeviceGroup(DeviceGroupCreationRequestV1 deviceGroupCreationRequest) {
+    public ResponseEntity<DeviceGroupV1> createDeviceGroup(DeviceGroupCreationRequestV1 deviceGroupCreationRequest) {
         try {
-            var id = devicesService.createDeviceGroup(deviceGroupCreationRequest.getName());
+            var device = devicesService.createDeviceGroup(deviceGroupCreationRequest.getName());
 
-            log.info("Device group created with id '{}'", id);
-
-            var response = new DeviceGroupCreationResponseV1.Builder()
-                    .id(id)
-                    .build();
+            log.info("Device group created with id '{}'", device.getId());
 
             return ResponseEntity
                     .status(201)
-                    .body(response);
+                    .body(mapper.toDto(device));
 
         } catch (Exception e) {
             log.error("Device group creation failed", e);
@@ -61,7 +61,7 @@ class DeviceGroupsController implements DeviceGroupsApi {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(new DeviceGroupV1().id(device.getId()).name(device.getName()));
+        return ResponseEntity.ok(mapper.toDto(device));
     }
 
     @Override
@@ -69,8 +69,7 @@ class DeviceGroupsController implements DeviceGroupsApi {
         var deviceGroups = devicesService.getAllDeviceGroups();
 
         var response = deviceGroups.stream()
-                .map(x ->
-                        new DeviceGroupV1().id(x.getId()).name(x.getName()).createdAt(x.getCreatedAt()))
+                .map(mapper::toDto)
                 .toList();
 
         return ResponseEntity.ok(response);

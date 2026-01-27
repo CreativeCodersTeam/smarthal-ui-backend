@@ -19,13 +19,11 @@ class DefaultDevicesService implements DevicesService {
 
     @Override
     @Transactional
-    public UUID createDeviceGroup(String name) {
+    public DeviceGroupEntity createDeviceGroup(String name) {
         var entity = new DeviceGroupEntity(null, name);
 
         try {
-            var saved = deviceGroupRepository.saveAndFlush(entity);
-
-            return saved.getId();
+            return deviceGroupRepository.saveAndFlush(entity);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }

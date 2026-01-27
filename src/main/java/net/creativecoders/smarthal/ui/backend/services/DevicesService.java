@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DevicesService {
-    UUID createDeviceGroup(String name);
+    DeviceGroupEntity createDeviceGroup(String name);
 
     List<DeviceGroupEntity> getAllDeviceGroups();
 

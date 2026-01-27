@@ -42,7 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceGroupCreationResponseV1'
+                $ref: '#/components/schemas/DeviceGroupV1'
     get:
       tags:
         - DeviceGroups
@@ -163,15 +163,6 @@ components:
           description: Name of the new device group
       required:
         - name
-    DeviceGroupCreationResponseV1:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the created device group
-          format: uuid
-      required:
-        - id
     LoginRequestV1:
       type: object
       properties:
